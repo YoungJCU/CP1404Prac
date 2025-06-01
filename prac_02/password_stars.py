@@ -1,6 +1,6 @@
 def main():
     password=get_password()
-    print("*"*len(password))
+    print_symbol(password,"*")
 
 
 
@@ -12,6 +12,9 @@ def get_password():
         print("Invalid")
         password = input("Enter password: ")
     return password
+
+def print_symbol(password, symbol):
+    print(symbol * len(password))
 
 
 
