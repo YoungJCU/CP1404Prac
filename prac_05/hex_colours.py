@@ -14,10 +14,11 @@ name_width=max((len(name) for name in COLOR_TO_CODE))
 
 print("\n".join([f"{name:{name_width}} is {value}"for name,value in COLOR_TO_CODE.items()]))
 
-state_code = input("Enter short state: ").upper()
-while state_code != "":
+COLOR_TO_CODE_LOWER={key.lower(): COLOR_TO_CODE[key]for key in COLOR_TO_CODE.keys()}
+color_code = input("Enter color: ").strip().lower()
+while color_code != "":
     try:
-        print(state_code, "is", COLOR_TO_CODE[state_code])
+        print(color_code, "is", COLOR_TO_CODE_LOWER[color_code])
     except KeyError:
-        print("Invalid short state")
-    state_code = input("Enter short state: ").upper
+        print("Invalid color")
+    color_code = input("Enter color: ").strip().lower()
