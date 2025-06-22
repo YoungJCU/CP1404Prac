@@ -1,6 +1,6 @@
 """
 estimate: 30
-actual:
+actual:32
 """
 
 text=input("Text: ")
