@@ -7,10 +7,12 @@ print(gibson.get_age())
 another = Guitar("Another Guitar", 2013, 1200.00)
 
 expected_gibson_age = 2025 - 1922
+
 actual_gibson_age = gibson.get_age()
 print(f"{gibson.name} get_age() - Expected {expected_gibson_age}. Got {actual_gibson_age}")
 
 expected_another_age = 2025 - 2013
+
 actual_another_age = another.get_age()
 print(f"{another.name} get_age() - Expected {expected_another_age}. Got {actual_another_age}")
 
