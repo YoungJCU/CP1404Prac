@@ -1,7 +1,7 @@
 """
 CP1404 prac
 time prediction: 30
-practical:
+practical:45
 """
 class ProgrammingLanguage:
     def __init__(self,name,typing,reflection,year=int):
