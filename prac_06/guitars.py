@@ -1,16 +1,26 @@
-class Guitar:
-    def __init__(self,name="",year=0,cost=0):
-        self.name=name
-        self.year=year
-        self.cost=cost
+from prac_06.guitar import Guitar
 
-    def __str__(self):
-        return f"{self.name} ({self.year}) : ${self.cost}"
+def main():
+    print("My guitars!")
+    guitars = []
 
-    def get_age(self):
+    name = input("Name: ")
 
-        return 2025-self.year
+    while name != "":
+        year = int(input("Year: "))
+        cost = float(input("Cost: $"))
 
-    def is_vintage(self):
-        return self.get_age()>=50
+        new_guitar = Guitar(name, year, cost)
+        guitars.append(new_guitar)
 
+        print(f"{new_guitar} added.\n")
+
+        name = input("Name: ")
+
+    print("\nThese are my guitars:")
+    for i, guitar in enumerate(guitars, start=1):
+        vintage_string = " (vintage)" if guitar.is_vintage() else ""
+        print(f"Guitar {i}: {guitar.name:>20} ({guitar.year}), worth ${guitar.cost:10,.2f}{vintage_string}")
+
+
+main()
