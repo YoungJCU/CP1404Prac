@@ -3,42 +3,39 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 from kivy.core.window import Window
 
-__author__ = "Your Name"
+__author__ = "Young"
 
 MILES_TO_KM = 1.60934
 
-
 class ConvertMilesKmApp(App):
-    """Kivy App to convert miles to kilometers."""
-    output_text = StringProperty()
+    """App for converting miles to kilometers with live update."""
+    output_text = StringProperty("0.0 km")
 
     def build(self):
-        """Build the Kivy app."""
+        """Load the Kivy GUI."""
         Window.size = (500, 200)
         self.title = "Convert Miles to Kilometres"
         self.root = Builder.load_file('convert_miles_km.kv')
-        self.output_text = "0.0 km"
         return self.root
 
-    def handle_convert(self, value):
-        """Handle conversion from miles to km."""
+    def handle_convert(self, text):
+        """Convert miles to km; handle invalid input."""
         try:
-            miles = float(value)
-            km = miles * MILES_TO_KM
-            self.output_text = f"{km:.3f} km"
+            miles = float(text)
         except ValueError:
-            self.output_text = "Invalid input"
+            miles = 0
+        km = miles * MILES_TO_KM
+        self.output_text = f"{km:.3f} km"
 
-    def handle_increment(self, value, step):
-        """Handle incrementing or decrementing the value by step."""
+    def handle_increment(self, text, delta):
+        """Increase/decrease miles, treating invalid as 0."""
         try:
-            miles = float(value)
-            miles += step
-            self.root.ids.input_miles.text = str(miles)
-            self.handle_convert(miles)
+            miles = float(text)
         except ValueError:
-            pass
-
+            miles = 0
+        miles += delta
+        self.root.ids.input_miles.text = str(miles)
+        self.handle_convert(miles)
 
 if __name__ == '__main__':
     ConvertMilesKmApp().run()
