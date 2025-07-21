@@ -1,0 +1,55 @@
+
+BoxLayout:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: 10
+
+        TextInput:
+            id: input_miles
+            text: '0'
+            multiline: False
+            font_size: 32
+            background_color: (1, 1, 1, 1)
+            foreground_color: (0, 0, 0, 1)
+            on_text: app.handle_convert(self.text)
+
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 5
+
+            Button:
+                text: 'Up'
+                font_size: 20
+                background_color: (0.3, 0.3, 0.3, 1)
+                color: (1, 1, 1, 1)
+                on_press: app.handle_increment(input_miles.text, 1)
+
+            Button:
+                text: 'Down'
+                font_size: 20
+                background_color: (0.3, 0.3, 0.3, 1)
+                color: (1, 1, 1, 1)
+                on_press: app.handle_increment(input_miles.text, -1)
+
+    # Convert button is commented out as per Stage 2
+    # Button:
+    #     text: 'Convert'
+    #     font_size: 24
+    #     background_color: (0.3, 0.3, 0.3, 1)
+    #     color: (1, 1, 1, 1)
+    #     on_press: app.handle_convert(input_miles.text)
+
+    Label:
+        text: app.output_text
+        font_size: 28
+        color: (1, 1, 0, 1)  # yellow
+        canvas.before:
+            Color:
+                rgba: (0, 0, 0, 1)  # black background
+            Rectangle:
+                pos: self.pos
+                size: self.size
