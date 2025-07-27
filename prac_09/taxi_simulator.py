@@ -2,16 +2,16 @@ from taxi import Taxi
 from silver_service_taxi import SilverServiceTaxi
 
 def main():
-    """Main program for the taxi simulator (initial draft with basic structure)."""
-    # Create a list of taxi instances
+    """Full version of the taxi simulator program."""
+    # Create taxi list with normal and silver service taxis
     taxis = [
         Taxi("Prius", 100),
         SilverServiceTaxi("Limo", 100, 2),
         SilverServiceTaxi("Hummer", 200, 4)
     ]
 
-    current_taxi = None  # No taxi selected at the beginning
-    total_bill = 0.0  # Start with zero total cost
+    current_taxi = None
+    total_bill = 0.0
 
     print("Let's drive!")
     menu = "q)uit, c)hoose taxi, d)rive"
@@ -20,7 +20,6 @@ def main():
 
     while choice != "q":
         if choice == "c":
-            # Display available taxis
             print("Taxis available:")
             for i, taxi in enumerate(taxis):
                 print(f"{i} - {taxi}")
@@ -33,8 +32,18 @@ def main():
             except ValueError:
                 print("Invalid input; enter a number.")
         elif choice == "d":
-            # Drive option not yet implemented
-            print("Drive feature coming soon.")
+            if current_taxi is None:
+                print("You need to choose a taxi before you can drive")
+            else:
+                try:
+                    distance = float(input("Drive how far? "))
+                    current_taxi.start_fare()
+                    current_taxi.drive(distance)
+                    trip_cost = current_taxi.get_fare()
+                    print(f"Your {current_taxi.name} trip cost you ${trip_cost:.2f}")
+                    total_bill += trip_cost
+                except ValueError:
+                    print("Please enter a valid distance.")
         else:
             print("Invalid option")
 
@@ -49,3 +58,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
