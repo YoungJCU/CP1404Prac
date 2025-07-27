@@ -10,7 +10,9 @@ class UnreliableCar(Car):
         self.reliability = reliability
 
     def drive(self, distance):
-        """Attempt to drive the car based on its reliability."""
-        # TODO: Implement actual unreliable logic in final step
-        print("Drive attempt (stub) - actual logic will go here.")
-        return 0  # Default to not driving
+
+        chance = random.uniform(0, 100)
+        if chance < self.reliability:
+            return super().drive(distance)
+        else:
+            return 0  # Car failed to start
