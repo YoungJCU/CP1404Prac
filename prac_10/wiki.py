@@ -1,7 +1,27 @@
 import wikipedia
 
-wikipedia.search("Barack")
-[u'Barak (given name)', u'Barack Obama', u'Barack (brandy)', u'Presidency of Barack Obama', u'Family of Barack Obama', u'First inauguration of Barack Obama', u'Barack Obama presidential campaign, 2008', u'Barack Obama, Sr.', u'Barack Obama citizenship conspiracy theories', u'Presidential transition of Barack Obama']
+from wikipedia.exceptions import DisambiguationError, PageError
 
-wikipedia.suggest("Barak Obama")
-u'Barack Obama'
+def main():
+    print("Enter page title (empty input to quit):")
+    user_input = input("Enter page title: ").strip()
+
+    while user_input != "":
+        try:
+            page = wikipedia.page(user_input, auto_suggest=False)
+            print(page.title)
+            print(page.summary)
+            print(page.url)
+            print()
+        except DisambiguationError as e:
+            print("We need a more specific title. Try one of the following, or a new search:")
+            print(e.options[:10])
+            print()
+        except PageError:
+            print(f'Page id "{user_input}" does not match any pages. Try another id!')
+            print()
+        user_input = input("Enter page title: ").strip()
+    print("Thank you.")
+
+if __name__ == "__main__":
+    main()
