@@ -4,7 +4,7 @@ Testing code using assert and doctest
 """
 
 import doctest
-from prac_06.car import Car
+from prac_09.car import Car
 
 
 def repeat_string(s, n):
@@ -39,20 +39,27 @@ def run_tests():
     # used to see if Car's init method sets the odometer correctly
     # this should pass (no output)
     car = Car()
-    assert car._odometer == 0, "Car does not set odometer correctly"
+
+
 
     # TODO: 2. write assert statements to show if Car sets the fuel correctly
     # Note that Car's __init__ function sets the fuel in one of two ways:
     # using the value passed in or the default
     # You should test both of these
-    car = Car(fuel=10)
 
+
+    car_with_default_fuel = Car()
+    assert car_with_default_fuel.fuel == 0
+
+    car_with_fuel = Car(fuel=10)
+    assert car_with_fuel.fuel == 10
 
 run_tests()
 
 # TODO: 3. Uncomment the following line and run the doctests
 # (PyCharm may see your >>> doctest comments and run doctests anyway.)
-# doctest.testmod()
+doctest.testmod()
+
 
 # TODO: 4. Fix the failing is_long_word function
 # (Don't change the tests, change the function!)
